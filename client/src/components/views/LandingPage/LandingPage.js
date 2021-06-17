@@ -8,21 +8,30 @@ import { Row } from 'antd'
 function LandingPage() {
 
     const [Movies, setMovies] = useState([])
-    const [MainMovieImage, setMainMovieImage] = useState()
+    const [MainMovieImage, setMainMovieImage] = useState(null)
+    const [CurrentPage, setCurrentPage] = useState(0)
 
 
     useEffect(() => {
         const endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=ko-Korean&page=1`;
+        fetchMovies(endpoint);
+    }, [])
 
+    const fetchMovies = (endpoint) => {
         fetch(endpoint)
         .then(response => response.json())
         .then(response => {
             console.log(response)
             setMovies([...Movies, ...response.results])
             setMainMovieImage(response.results[0])
+            setCurrentPage(response.page)
         });
+    }
 
-    }, [])
+    const loadMoreItems = () => {
+        const endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=ko-Korean&page=${CurrentPage + 1}`;
+        fetchMovies(endpoint)
+    }
 
 
     return (
@@ -38,7 +47,7 @@ function LandingPage() {
             }  
             <div style={{ width: '85%', margin: '1rem auto' }}>
 
-                <h2>최신 영화</h2>
+                <h2 style={{fontWeight:'900'}}>| 최신 영화</h2>
                 <hr />
 
                 { /* Movie Grid Cards */}
@@ -58,7 +67,7 @@ function LandingPage() {
             </div>
 
             <div style={{ display: 'flex', justifyContent: 'center' }}>
-                <button>더보기</button>
+                <button onClick={loadMoreItems}>더 보기</button>
             </div>
         </div>
     )

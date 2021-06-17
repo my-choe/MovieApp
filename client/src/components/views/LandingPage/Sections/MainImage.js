@@ -14,8 +14,8 @@ function MainImage(props){
             position: 'relative'
         }}>
             <div style={{ position: 'absolute', maxWidth:'500px', bottom: '2rem', marginLeft:'2rem'}}>
-                <h2 style={{ color:'white' }}> {props.title} </h2>
-                <p style={{ color: 'white', fontSize: '1rem'}}> {props.overview}</p>
+                <h1 style={{ color:'white', fontWeight:'900', fontSize:'30pt'}}> {props.title} </h1>
+                <p style={{ color: 'white', fontSize: '1rem', width: '900px'}}> {props.overview}</p>
             </div>
         </div>
     )

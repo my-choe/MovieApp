@@ -49,7 +49,7 @@ function FavoritePage() {
                 }
             </div>
         )
-        return <tr ley={index}>
+        return <tr key={index}>
             <Popover content={content} title={`${favorite.movieTitle}`}>
                 <td style={{width:'5%'}}>
                     {favorite.moviePost ? 
